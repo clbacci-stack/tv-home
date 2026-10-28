@@ -1,0 +1,1 @@
+{"name":"tv-home","version":"1.0.0","appName":"Claudio Home","description":"A personal home screen: clock, Luxembourg weather and your apps.","packageType":"app","appPath":"index.html","serviceFile":"service.js","keys":["ColorF0Red","ColorF1Green","ColorF2Yellow","ColorF3Blue"],"license":"MIT"}
