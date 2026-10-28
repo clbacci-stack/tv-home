@@ -1,0 +1,82 @@
+/* Sized for the TV's 1920x1080 web viewport. Kept to features the 2019 Tizen browser supports. */
+:root {
+  --accent: #f2c47c;
+  --text: #f4f1ea;
+  --muted: rgba(244, 241, 234, 0.62);
+  --tile: rgba(18, 22, 34, 0.58);
+  --tile-line: rgba(255, 255, 255, 0.08);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 1920px; height: 1080px; overflow: hidden;
+  background: #0d1018; color: var(--text);
+  font-family: "SamsungOne", "Samsung Sans", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background: slow-moving colour field, or crossfading photos */
+#bg, #bg .layer, #bg .shade { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+#bg .layer { background-size: cover; background-position: center; opacity: 0; transition: opacity 2.5s ease; }
+#bg .layer.on { opacity: 1; }
+#bg .layer.field {
+  background:
+    radial-gradient(1100px 700px at 15% 20%, #2b3a63 0%, rgba(43,58,99,0) 70%),
+    radial-gradient(900px 650px at 85% 80%, #5a3550 0%, rgba(90,53,80,0) 70%),
+    radial-gradient(800px 600px at 70% 15%, #1f4a52 0%, rgba(31,74,82,0) 70%),
+    #0d1018;
+  -webkit-animation: drift 60s ease-in-out infinite alternate;
+  animation: drift 60s ease-in-out infinite alternate;
+}
+@-webkit-keyframes drift { from { -webkit-transform: scale(1) translate(0,0); } to { -webkit-transform: scale(1.12) translate(-40px,20px); } }
+@keyframes drift { from { transform: scale(1) translate(0,0); } to { transform: scale(1.12) translate(-40px,20px); } }
+#bg .shade {
+  background: linear-gradient(180deg, rgba(8,10,16,0.55) 0%, rgba(8,10,16,0.15) 40%, rgba(8,10,16,0.75) 100%);
+}
+
+main { position: relative; width: 1920px; height: 1080px; padding: 84px 112px 64px; }
+
+header { display: flex; justify-content: space-between; align-items: flex-start; }
+#clock { font-size: 168px; font-weight: 200; letter-spacing: -4px; line-height: 1; }
+#date { margin-top: 18px; font-size: 38px; color: var(--muted); font-weight: 300; }
+
+.weather { text-align: right; padding-top: 18px; }
+.wx-now { font-size: 64px; font-weight: 300; }
+.wx-now #wxText { margin-left: 22px; font-size: 38px; color: var(--muted); }
+.wx-range { margin-top: 10px; font-size: 32px; color: var(--muted); }
+.wx-place { margin-top: 6px; font-size: 26px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; }
+
+.greet { position: absolute; left: 112px; top: 560px; font-size: 44px; font-weight: 300; color: var(--text); }
+
+#tiles {
+  position: absolute; left: 0; right: 0; top: 610px; height: 320px; overflow: hidden;
+}
+#track {
+  position: absolute; left: 112px; top: 40px;
+  display: flex; flex-wrap: nowrap;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+.tile {
+  position: relative; flex: 0 0 auto;
+  width: 220px; height: 220px; margin-right: 28px;
+  border-radius: 28px; background: var(--tile); border: 2px solid var(--tile-line);
+  display: flex; flex-direction: column; justify-content: space-between; padding: 30px 28px;
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+  outline: none;
+}
+.tile svg { width: 64px; height: 64px; fill: none; stroke: var(--text); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+.tile .label { font-size: 30px; font-weight: 400; line-height: 1.15; }
+.tile.sel {
+  -webkit-transform: scale(1.12) translateY(-10px); transform: scale(1.12) translateY(-10px);
+  background: rgba(30, 34, 48, 0.86); border-color: var(--accent);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+.tile.sel svg { stroke: var(--accent); }
+.tile.busy::after {
+  content: ""; position: absolute; left: 28px; right: 28px; bottom: 18px; height: 3px; border-radius: 2px;
+  background: var(--accent); -webkit-animation: pulse 1s ease-in-out infinite; animation: pulse 1s ease-in-out infinite;
+}
+@-webkit-keyframes pulse { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+@keyframes pulse { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+footer { position: absolute; left: 112px; right: 112px; bottom: 60px; display: flex; justify-content: space-between; font-size: 26px; color: var(--muted); }
+#status { color: var(--text); }
