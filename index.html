@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1920, height=1080">
+<title>Claudio Home</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="bg"><div class="layer" id="bgA"></div><div class="layer" id="bgB"></div><div class="shade"></div></div>
+
+<main>
+  <header>
+    <div class="when">
+      <div id="clock">--:--</div>
+      <div id="date"></div>
+    </div>
+    <div class="weather" id="weather">
+      <div class="wx-now"><span id="wxTemp">--°</span><span id="wxText"></span></div>
+      <div class="wx-range" id="wxRange"></div>
+      <div class="wx-place" id="wxPlace"></div>
+    </div>
+  </header>
+
+  <section class="greet" id="greet"></section>
+
+  <nav id="tiles" aria-label="Apps"></nav>
+
+  <footer>
+    <span id="status"></span>
+    <span class="hint" id="hint"></span>
+  </footer>
+</main>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
